@@ -16,6 +16,7 @@ public class FindPassword1 implements Callable<String> {
     String hashPassword;
     int start;
     int end;
+    StringBuilder sb = new StringBuilder();
 
     public FindPassword1(String hashPassword, int start, int end) {
         this.hashPassword = hashPassword;
@@ -28,13 +29,20 @@ public class FindPassword1 implements Callable<String> {
         if (this.hashPassword != null) {
             String hash;
             String tmp;
-            for (int i = start; i < end; i++) {
+            for (int i = 0; i < Beispiel1.großbuchstaben.length; i++) {
+
                 for (int j = 0; j < Beispiel1.großbuchstaben.length; j++) {
+
                     for (int k = 0; k < Beispiel1.großbuchstaben.length; k++) {
+
                         for (int l = 0; l < Beispiel1.großbuchstaben.length; l++) {
+
                             for (int m = 0; m < Beispiel1.großbuchstaben.length; m++) {
-                                for (int n = 0; n < Beispiel1.großbuchstaben.length; n++) {
+
+                                for (int n = start; n < end; n++) {
+
                                     tmp = Beispiel1.großbuchstaben[i] + Beispiel1.großbuchstaben[j] + Beispiel1.großbuchstaben[k] + Beispiel1.großbuchstaben[l] + Beispiel1.großbuchstaben[m] + Beispiel1.großbuchstaben[n];
+
                                     hash = StringUtil.applySha256(tmp);
                                     if (hash.equals(this.hashPassword)) {
                                         return tmp;
@@ -48,6 +56,7 @@ public class FindPassword1 implements Callable<String> {
                 }
 
             }
+
         }
         return null;
     }

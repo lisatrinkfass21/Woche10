@@ -14,13 +14,42 @@ import java.util.concurrent.Callable;
 public class FindPassword2 implements Callable<String> {
 
     String hashPassword;
+    int start;
+    int end;
 
-    public FindPassword2(String hashPassword) {
+    public FindPassword2(String hashPassword, int start, int end) {
         this.hashPassword = hashPassword;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public String call() throws Exception {
+        if (this.hashPassword != null) {
+            String hash;
+            String tmp;
+            for (int i = start; i < end; i++) {
+                for (int j = 0; j < Beispiel1.klgrza.length; j++) {
+                    for (int k = 0; k < Beispiel1.klgrza.length; k++) {
+                        for (int l = 0; l < Beispiel1.klgrza.length; l++) {
+                            for (int m = 0; m < Beispiel1.klgrza.length; m++) {
+                                tmp = Beispiel1.klgrza[i] + Beispiel1.klgrza[j] + Beispiel1.klgrza[k] + Beispiel1.klgrza[l] + Beispiel1.klgrza[m];
+                                hash = StringUtil.applySha256(tmp);
+                                if (hash.equals(this.hashPassword)) {
+                                    return tmp;
+
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
         return null;
 
     }
