@@ -26,7 +26,7 @@ public class FindPassword1 implements Callable<String> {
 
     @Override
     public String call() throws Exception {
-        if (this.hashPassword != null) {
+        /*if (this.hashPassword != null) { // probiert alle verschiedenen Kombinationen bis sie passt - sehr langsam jedoch nach bestimmter Zeit fertig
             String hash;
             String tmp;
             for (int i = 0; i < Beispiel1.großbuchstaben.length; i++) {
@@ -58,6 +58,23 @@ public class FindPassword1 implements Callable<String> {
             }
 
         }
+        return null;*/ //unbestimmte Zeit
+        String tmp;
+        String hash;
+        do {
+            sb.delete(0, sb.length());
+            for (int i = 0; i < 6; i++) {
+                sb.append(Beispiel1.großbuchstaben[(int) (Math.random() * Beispiel1.großbuchstaben.length)]);
+            }
+            tmp = sb.toString();
+            hash = StringUtil.applySha256(tmp);
+            if (hash.equals(this.hashPassword)) {
+                Beispiel1.found = true;
+                return tmp;
+            }
+
+        } while (Beispiel1.found == false);
         return null;
+
     }
 }

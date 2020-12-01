@@ -39,6 +39,7 @@ public class Beispiel1 {
     private static final File path1 = new File("password1");
     private static final File path2 = new File("password2");
     private static final File path3 = new File("password3");
+    public static volatile boolean found = false;
     public static final String[] kleinbuchstaben = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     public static final String[] großbuchstaben = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "F", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     public static final String[] klgrza = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
@@ -91,9 +92,9 @@ public class Beispiel1 {
                 System.out.println("Passwort 0: " + future.get());
             }
         }
-        /*
+
         //Passwort1
-        value = großbuchstaben.length / NUMBER_THREADS;
+        value = großbuchstaben.length / NUMBER_THREADS; //notwendig bei langsamer variante
         List<FindPassword1> tasks2 = new ArrayList<>();
         begin = 0;
         for (int i = 0; i < NUMBER_THREADS; i++) {
@@ -106,9 +107,10 @@ public class Beispiel1 {
                 System.out.println("Passwort 1: " + future.get());
             }
         }
-         */
+
         //Passwort2
-        value = klgrza.length / NUMBER_THREADS;
+        value = klgrza.length / NUMBER_THREADS; //notwendig bei langsamer variante
+        found = false;
         List<FindPassword2> tasks3 = new ArrayList<>();
         begin = 0;
         for (int i = 0; i < NUMBER_THREADS; i++) {

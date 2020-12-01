@@ -36,7 +36,7 @@ public class createSubstring implements Callable<Integer> {
     }
 
     private synchronized void print(List<Integer> list, int count) {
-        // System.out.println("");
+        System.out.println("");
         System.out.print("<");
         for (Integer integer : list) {
             System.out.print(integer + ", ");
