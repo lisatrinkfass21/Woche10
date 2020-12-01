@@ -35,14 +35,16 @@ public class createSubstring implements Callable<Integer> {
         return set.size();
     }
 
-    private synchronized void print(List<Integer> list, int count) {
-        System.out.println("");
-        System.out.print("<");
-        for (Integer integer : list) {
-            System.out.print(integer + ", ");
+    private void print(List<Integer> list, int count) {
+        synchronized (Beispiel2.class) {
+            System.out.println("");
+            System.out.print("<");
+            for (Integer integer : list) {
+                System.out.print(integer + ", ");
+            }
+            System.out.print("> - Hat " + count + " unterschiedlichen Zahlen");
+            System.out.println("");
         }
-        System.out.print("> - Hat " + count + " unterschiedlichen Zahlen");
-        System.out.println("");
     }
 
 }

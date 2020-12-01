@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  */
 public class Beispiel2 {
 
-    private final static File file = new File("numbers0");
+    private final static File file = new File("numbers3");
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
 
@@ -34,24 +34,33 @@ public class Beispiel2 {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             value = Integer.parseInt(br.readLine());
-            String num = br.readLine();
-            String[] x = num.split(" ");
-            for (int i = 0; i < x.length; i++) {
-                numbers.add(Integer.parseInt(x[i]));
+            String text = br.readLine();
+            while (text != null) {
+                String[] x = text.split(" ");
+                for (int i = 0; i < x.length; i++) {
+                    numbers.add(Integer.parseInt(x[i]));
+
+                }
+                text = br.readLine();
             }
+
         } catch (FileNotFoundException ex1) {
             Logger.getLogger(Beispiel2.class.getName()).log(Level.SEVERE, null, ex1);
         } catch (IOException ex1) {
             Logger.getLogger(Beispiel2.class.getName()).log(Level.SEVERE, null, ex1);
         }
 
-        int anzahlThreads = numbers.size() - value + 1;
+        int anzahlThreads = numbers.size() - value + 1; // Anzahl der ausgebenden Zeilen in createSubString
         ExecutorService ex = Executors.newFixedThreadPool(anzahlThreads);
         List<createSubstring> tasks = new ArrayList<>();
         for (int i = 0; i < anzahlThreads; i++) {
             tasks.add(new createSubstring(numbers, value, i));
         }
-        System.out.println(anzahlThreads);
+        //System.out.println(anzahlThreads);
+        /*for (Integer task : numbers) {
+            System.out.println(task);
+
+        }*/
 
         List<Future<Integer>> sizes = ex.invokeAll(tasks);
         int max = Integer.MIN_VALUE;
